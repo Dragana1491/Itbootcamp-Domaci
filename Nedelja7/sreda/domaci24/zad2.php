@@ -13,7 +13,7 @@ Koji dan je najuspesniji
 Kolika je prosecna uspesnost
 Razliku izmedju najbolje i najgore uspesnosti*/
 
-$x=['ponedeljak'=>27, 'utorak'=>29, 'cetvrtak'>28, 'petak'=>28];
+$x=['ponedeljak'=>27, 'utorak'=>29, 'cetvrtak'=>28, 'petak'=>28];
 
 function uspesnost($x){
     $max=0;
