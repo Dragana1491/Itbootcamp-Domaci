@@ -1,0 +1,15 @@
+- koji odjednom dodaje 3 proizvoda:789, "paradajz", 200; 776, "crni luk", 50;761, "beli luk", 80
+INSERT INTO `proizvodi`(`barkod`, `naziv`, `cena`) VALUES ('789','paradajz','200'),('776','crni luk','50'),('761','beli luk','80')
+- koja dodaje prodaju paradajz za datum 16.6 - 50 kom po ceni 200:   INSERT INTO `prodaja`(`id`, `barkod`, `kolicina`, `cena`, `datum`) VALUES ('NULL','789','50','200','2021.06.16.')
+- koja dodaje prodaju paradajz za datum 17.6 - 20 kom po ceni 200:    INSERT INTO `prodaja`(`id`, `barkod`, `kolicina`, `cena`, `datum`) VALUES ('NULL','789','20','200','2021.06.17.')
+- koja dodaje prodaju paradajz za datum 17.6 - 40 kom po ceni 250:     INSERT INTO `prodaja`(`id`, `barkod`, `kolicina`, `cena`, `datum`) VALUES ('NULL','789','40','250','2021.06.17.')
+- koja dodaje prodaju paradajz za datum 17.6 - 10 kom po ceni 220:   INSERT INTO `prodaja`(`id`, `barkod`, `kolicina`, `cena`, `datum`) VALUES ('NULL','789','10','220','2021.06.17.')
+- koja dodaje prodaju crni luk za datum 1.5 - 30 kom po ceni 50:     INSERT INTO `prodaja`(`id`, `barkod`, `kolicina`, `cena`, `datum`) VALUES ('NULL','776','30','50','2021.05.01.')
+- dodati 3 prodaje za beli luk po izboru:    INSERT INTO `prodaja`(`id`, `barkod`, `kolicina`, `cena`, `datum`) VALUES ('NULL','776','10','40','2021.05.01.'),('NULL','776','30','50','2021.06.16.'),('NULL','776','50','80','2021.06.17.')
+- brise svu prodaju paradajza za datum 16.6:   DELETE FROM `prodaja` WHERE datum='2021.06.16' AND barkod=789    
+- svim prodajama za datum 17.6 dodaje na cenu 10%:   UPDATE `prodaja` SET `cena`=cena+cena*0.1 WHERE datum='2021.06.17.'
+- prikazuje barkodove svih proizvoda koji su imali prodaju 1.5.:    SELECT `barkod` FROM `prodaja` WHERE datum='2021.05.01.'
+- prikazuje samo razlicite barkodove koji su imali prodaju 1.5:   SELECT DISTINCT `barkod` FROM `prodaja` WHERE datum='2021.05.01.'
+- prikazuje ukupnu kolicinu prodatih proizvoda po datumima, tako sto prikazuje dve kolone:  datum,  ukupna_kolicina:   SELECT datum, SUM(`kolicina`) AS `ukupna_kolicina` FROM `prodaja` GROUP BY datum
+- prikazuje ukupnu kolicinu prodaje po proizvodu, tako sto prikazuje dve kolone:  proizvod,  ukupna_kolicina:   SELECT naziv AS `proizvod`, SUM(`kolicina`) AS `ukupna_kolicina` FROM `prodaja` JOIN proizvodi ON proizvodi.barkod=prodaja.barkod GROUP BY proizvodi.barkod
+- prikazuje ukupnu kolicinu prodaje po proizvodu i datumu, tako sto prikazuje tri kolone:  proizvod,  datum, ukupna_kolicina:   SELECT datum, naziv AS `proizvod`, SUM(`kolicina`) AS `ukupna_kolicina` FROM `prodaja` JOIN proizvodi ON proizvodi.barkod=prodaja.barkod GROUP BY proizvodi.barkod, datum
